@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gadget Shop Bill Calculator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-image: url(gadgets.jpg);
+            background-size: cover;
+            background-position: center;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 80%;
+            margin: 50px auto;
+            padding: 40px;
+            background-color: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            color: blue;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: blue;
+            color: white;
+        }
+
+        button {
+            padding: 12px 25px;
+            background-color: blue;
+            color: white;
+            border: none;
+            font-size: 1.1em;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background-color: lightblue;
+        }
+
+        #reset-button {
+            background-color: #f44336;
+            margin-left: 15px;
+        }
+
+        #reset-button:hover {
+            background-color: #e53935;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Gadget Shop Bill Calculator</h1>
+        </header>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Gadget</th>
+                    <th>Price (EXCL GST)</th>
+                    <th>GST %</th>
+                    <th>Quantity</th>
+                    <th>Offer</th>
+                    <th>Total (INCL GST)</th>
+                </tr>
+            </thead>
+            <tbody id="product-list">
+            </tbody>
+        </table>
+
+        <div style="text-align: center; font-size: 1.5em; margin-top: 20px;">
+            <p><strong>Total Bill (INCL GST):</strong> ₹<span id="total-bill">0</span></p>
+        </div>
+
+        <div style="text-align: center; margin-top: 20px;">
+            <button id="calculate-button">Calculate Total</button>
+            <button id="reset-button">Reset</button>
+        </div>
+    </div>
+
+    <script>
+        const gadgets = [
+            { name: "Smartphone", price: 25000, gst: 18, offer: 10 },
+            { name: "Laptop", price: 55000, gst: 12, offer: 5 },
+            { name: "Headphones", price: 3000, gst: 5, offer: 15 },
+            { name: "Smartwatch", price: 8000, gst: 18, offer: 0 },
+            { name: "Tablet", price: 20000, gst: 12, offer: 8 }
+        ];
+        
+        const productList = document.getElementById("product-list");
+        
+        gadgets.forEach((gadget, index) => {
+            const row = document.createElement("tr");
+            row.innerHTML = `
+                <td>${gadget.name}</td>
+                <td>₹${gadget.price}</td>
+                <td>${gadget.gst}%</td>
+                <td><input type="number" id="qty-${index}" value="0" min="0"></td>
+                <td>${gadget.offer}% off</td>
+                <td id="total-${index}">₹0</td>
+            `;
+            productList.appendChild(row);
+        });
+        
+        function calculateBill() {
+            let grandTotal = 0;
+            gadgets.forEach((gadget, index) => {
+                let qty = document.getElementById(`qty-${index}`).value || 0;
+                let discount = (gadget.price * gadget.offer) / 100;
+                let discountedPrice = gadget.price - discount;
+                let total = qty * discountedPrice;
+                let gstAmount = (total * gadget.gst) / 100;
+                let totalWithGST = total + gstAmount;
+                document.getElementById(`total-${index}`).textContent = `₹${totalWithGST.toFixed(2)}`;
+                grandTotal += totalWithGST;
+            });
+            document.getElementById("total-bill").textContent = grandTotal.toFixed(2);
+        }
+
+        function resetCalculator() {
+            document.querySelectorAll('input[type="number"]').forEach(input => input.value = 0);
+            document.querySelectorAll('td[id^="total-"]').forEach(td => td.textContent = '₹0');
+            document.getElementById("total-bill").textContent = 0;
+        }
+
+        document.getElementById("calculate-button").addEventListener("click", calculateBill);
+        document.getElementById("reset-button").addEventListener("click", resetCalculator);
+    </script>
+</body>
+</html>

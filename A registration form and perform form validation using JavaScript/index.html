@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Application Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #1E90FF, #00BFFF);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            width: 450px;
+            text-align: left;
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+        textarea {
+            resize: vertical;
+        }
+        button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            padding: 12px;
+            width: 48%;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background 0.3s;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .reset {
+            background-color: #dc3545;
+        }
+        .reset:hover {
+            background-color: #a71d2a;
+        }
+        .error {
+            color: red;
+            font-size: 12px;
+            margin-top: 5px;
+        }
+        .checkbox-container {
+            display: flex;
+            align-items: center;
+        }
+        .checkbox-container input {
+            width: auto;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Job Application Form</h2>
+        <form id="jobForm" onsubmit="return validateForm()">
+            <div class="form-group">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" pattern="[A-Za-z\s]+" required>
+                <div class="error" id="nameError"></div>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" required>
+                <div class="error" id="emailError"></div>
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" pattern="[0-9]{10}" required>
+                <div class="error" id="phoneError"></div>
+            </div>
+            <div class="form-group">
+                <label for="dob">Date of Birth</label>
+                <input type="date" id="dob" required>
+                <div class="error" id="dobError"></div>
+            </div>
+            <div class="form-group">
+                <label for="position">Position Applied For</label>
+                <select id="position" required>
+                    <option value="">Select Position</option>
+                    <option value="Software Engineer">Software Engineer</option>
+                    <option value="Data Analyst">Data Analyst</option>
+                    <option value="Project Manager">Project Manager</option>
+                    <option value="HR Manager">HR Manager</option>
+                    <option value="Marketing Specialist">Marketing Specialist</option>
+                </select>
+                <div class="error" id="positionError"></div>
+            </div>
+            <div class="form-group">
+                <label for="experience">Years of Experience</label>
+                <input type="number" id="experience" min="0" required>
+                <div class="error" id="experienceError"></div>
+            </div>
+            <div class="form-group">
+                <label for="resume">Upload Resume</label>
+                <input type="file" id="resume" required>
+                <div class="error" id="resumeError"></div>
+            </div>
+            <div class="form-group">
+                <label for="gender">Gender</label>
+                <select id="gender" required>
+                    <option value="">Select</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other</option>
+                </select>
+                <div class="error" id="genderError"></div>
+            </div>
+            <div class="form-group">
+                <label for="address">Address</label>
+                <textarea id="address" rows="3" required></textarea>
+                <div class="error" id="addressError"></div>
+            </div>
+            <div class="form-group checkbox-container">
+                <input type="checkbox" id="terms" required>
+                <label for="terms">I confirm that the above information is true and correct.</label>
+                <div class="error" id="termsError"></div>
+            </div>
+            <div style="display: flex; justify-content: space-between;">
+                <button type="submit">Submit</button>
+                <button type="reset" class="reset">Reset</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        function validateForm() {
+            let fields = ["name", "email", "phone", "dob", "position", "experience", "resume", "gender", "address", "terms"];
+            let isValid = true;
+            
+            fields.forEach(field => {
+                let input = document.getElementById(field);
+                let error = document.getElementById(field + "Error");
+                if (!input.checked && (input.type === 'checkbox')) {
+                    error.innerText = "You must confirm that the above information is true and correct.";
+                    isValid = false;
+                } else if (!input.value.trim()) {
+                    error.innerText = "This field is required.";
+                    isValid = false;
+                } else {
+                    error.innerText = "";
+                }
+            });
+            return isValid;
+        }
+    </script>
+</body>
+</html>

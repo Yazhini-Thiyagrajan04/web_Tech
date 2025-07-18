@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TurnThePage</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        body {
+            background-color: #f8f8f8;
+            text-align: center;
+        }
+        .navbar {
+            background-color: black;
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .navbar span {
+            font-weight: bold;
+            font-size: 22px;
+        }
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+        .content {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            justify-content: center;
+            padding: 40px;
+        }
+        .author {
+            text-align: center;
+        }
+        .author img {
+            width: 120px;
+            height: 150px;
+            border-radius: 10px;
+        }
+        .table-container {
+            margin: 40px auto;
+            width: 80%;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background-color: #333;
+            color: white;
+        }
+        .form-container {
+            width: 40%;
+            margin: 30px auto;
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        .form-container input, .form-container textarea {
+            width: 100%;
+            padding: 4px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        .form-container button {
+            width: 100%;
+            background-color: blue;
+            color: white;
+            padding: 6px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .footer {
+            background-color: blue;
+            color: white;
+            padding: 10px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <span>Turn</span>
+        <div>
+            <a href="#">HOme</a>
+        </div>
+    </div>
+     <div>
+        <div class="content">
+            <div class="author">
+                <img src = "vai.jpg " alt = "Vairamuthu">
+                <h3>Vai</h3>
+            </div>
+        </div>  
+       </div>
+       <div class = "table-container">
+        <table>
+            <tr>
+                <th>SNO</th>
+            </tr>
+            <tr>
+                <td>1</td>
+            </tr>
+        </table>
+       </div>
+</body>
+</html>
